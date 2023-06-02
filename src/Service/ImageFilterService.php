@@ -7,7 +7,7 @@ use Symfony\Component\Filesystem\Filesystem;
 
 class ImageFilterService
 {
-    private const LIMIT = 2;
+    private const LIMIT = 3000;
 
     private \SplFileObject $fileHandler;
 
@@ -76,6 +76,10 @@ class ImageFilterService
         $result = [];
         foreach ($rows as $val) {
             $includeInResult = false;
+
+            if (is_null($name) && is_null($discountPercent)) {
+                $includeInResult = true;
+            }
 
             if ($name && $discountPercent) {
                 if ($this->searchByName($val, $name) && $this->searchDiscountPercent($val, $discountPercent)) {

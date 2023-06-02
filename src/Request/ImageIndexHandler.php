@@ -23,9 +23,10 @@ class ImageIndexHandler
             $imageIndexRequest->getDiscountPercentage(),
         );
 
-        echo json_encode($result);die;
-
-        return $result;
+        return [
+            'data'  => $result,
+            'count' => count($result)
+        ];
     }
 
     private function getFilePath(): string

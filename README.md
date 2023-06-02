@@ -22,4 +22,7 @@ This application basically filtering the image in the uploaded CSV file regardin
 
 ## Extra information
 
-I have used PHP generators while reading the file to reduce memory consumption in case huge files and this took a bit extra time like around 20 mins.
+I have used **PHP generators** while reading the file to reduce memory consumption in case huge files and this took a bit extra time like around 20 mins.
+
+I might add file upload feature instead of moving the file in the data folder but due to time restriction and since not using database didn't do that. 
+Beside than this, I could add Unit test and Swagger also for API documentation but since there is only 1 endpoint I decide to explain all the details about it in the README already.
