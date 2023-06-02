@@ -8,9 +8,13 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ImageIndexConverter implements ParamConverterInterface
 {
+    private const
+        NAME = 'name',
+        DISCOUNT_PERCENTAGE = 'discount_percentage';
+
     public function apply(Request $request, ParamConverter $configuration)
     {
-        $imageIndexRequest = new ImageIndexRequest();
+        $imageIndexRequest = new ImageIndexRequest($request->get(self::NAME, null), $request->get(self::DISCOUNT_PERCENTAGE, null));
 
         $request->attributes->set($configuration->getName(), $imageIndexRequest);
 

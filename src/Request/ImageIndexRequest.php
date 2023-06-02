@@ -4,7 +4,7 @@ namespace App\Request;
 
 class ImageIndexRequest
 {
-    public function __construct(private ?int $discountPercentage = null, private ?string $name = null)
+    public function __construct(private ?string $name = null, private ?int $discountPercentage = null)
     {
     }
 
