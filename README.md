@@ -3,16 +3,22 @@ This application basically filtering the image in the uploaded CSV file regardin
 
 ## Project Requirements
 - PHP >=8.0
-- Composer
-- Symfony CLI
+- Composer . You can find [here](https://getcomposer.org/download/) how to download and install.
+- Symfony CLI . You can find [here](https://symfony.com/download) how to download and install.
 
 ## Install
 - `composer install`
-- `symfony server:start`
+- `symfony server:start` then check `http://127.0.0.1:8000` to see symfony page.
 
 ## Upload CSV file command
 - `bin/console image-list:csv-upload FULL_FIL_PATH`
 - Example: `bin/console image-list:csv-upload /Users/mesutvatansever/Downloads/test.csv`
+
+## Filter Endpoint
+
+- Filter based on name: `http://127.0.0.1:8000/image?name=Beach`
+- Filter based on discount percent: `http://127.0.0.1:8000/image?discount_percentage=12`
+- Filter based on both name and discount percent: `http://127.0.0.1:8000/image?name=Beach&discount_percentage=12`
 
 ## Extra information
 
