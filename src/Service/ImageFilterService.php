@@ -73,53 +73,15 @@ class ImageFilterService
 
     private function search(array $rows, ?string $name = null, ?int $discountPercent = null): array
     {
-        $result = [];
-        foreach ($rows as $val) {
-            $includeInResult = false;
-
-            if (is_null($name) && is_null($discountPercent)) {
-                $includeInResult = true;
-            }
-
-            if ($name && $discountPercent) {
-                if ($this->searchByName($val, $name) && $this->searchDiscountPercent($val, $discountPercent)) {
-                    $includeInResult = true;
-                } else {
-                    $includeInResult = false;
-                }
-            }
-
-            if ($discountPercent && $this->searchDiscountPercent($val, $discountPercent)) {
-                if ($name && $this->searchByName($val, $name)) {
-                    $includeInResult = true;
-                } else {
-                    $includeInResult = is_null($name) && $this->searchDiscountPercent($val, $discountPercent);
-                }
-            }
-
-            if ($name && $this->searchByName($val, $name)) {
-                if ($discountPercent && $this->searchDiscountPercent($val, $discountPercent)) {
-                    $includeInResult = true;
-                } else {
-                    $includeInResult = is_null($discountPercent) && $this->searchByName($val, $name);
-                }
-            }
-
-            if ($includeInResult) {
-                $result[] = $val;
-            }
+        if (is_null($name) && is_null($discountPercent)) {
+            return $rows; // Return all rows when no criteria are provided
         }
-
-        return $result;
-    }
-
-    private function searchByName(array $val, string $name): bool
-    {
-        return str_contains($val[1], $name);
-    }
-
-    private function searchDiscountPercent(array $val, int $discountPercent): bool
-    {
-        return $val[3] == $discountPercent;
+    
+        return array_filter($rows, function ($val) use ($name, $discountPercent) {
+            $nameMatch = is_null($name) || str_contains($val[1], $name);
+            $discountPercentMatch = is_null($discountPercent) || $val[3] == $discountPercent;
+    
+            return $nameMatch || $discountPercentMatch;
+        });
     }
 }
